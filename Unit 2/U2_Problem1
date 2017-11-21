@@ -1,0 +1,48 @@
+/* Created by Brian Yu on 9/17/2017
+def girlscoutcookiecounter()
+    prompt user to enter how many girl scouts in the troop
+    for(number of girl scouts in troop)
+        prompt user to enter boxes of cookies sold by each girl
+        depending whether boxes sold fits between 0-10, 11-20, 21-30, 31-40, or 40+, add 1
+    print table of statistics
+ */
+import java.util.Scanner;
+
+public class U2_Problem1 {
+    public static void main(String[] args){
+        Scanner keyboard = new Scanner(System.in);
+        int[] girlScoutCookieSales = new int[5];
+        int[] numberOfBoxes;
+        int girlScouts;
+
+        System.out.println("Please enter in the number of girl scouts in the troop.");
+        girlScouts = keyboard.nextInt();
+        numberOfBoxes = new int[girlScouts];
+        for(int i=0; i<girlScouts; i++){
+            System.out.println("Please enter in the number of cookies girl scout #" + (i+1) + " sold.");
+            numberOfBoxes[i] = keyboard.nextInt();
+            if(numberOfBoxes[i]>= 0 && numberOfBoxes[i]<= 10){
+                girlScoutCookieSales[0]++;
+            }
+            if(numberOfBoxes[i]>= 11 && numberOfBoxes[i]<= 20){
+                girlScoutCookieSales[1]++;
+            }
+            if(numberOfBoxes[i]>= 21 && numberOfBoxes[i]<= 30){
+                girlScoutCookieSales[2]++;
+            }
+            if(numberOfBoxes[i]>= 31 && numberOfBoxes[i]<= 40){
+                girlScoutCookieSales[3]++;
+            }
+            if(numberOfBoxes[i]>= 41){
+                girlScoutCookieSales[4]++;
+            }
+        }
+
+        System.out.println("Total Boxes \t Number of Girl Scouts");
+        System.out.println("0 to 10 \t\t " + girlScoutCookieSales[0]);
+        System.out.println("11 to 20 \t\t " + girlScoutCookieSales[1]);
+        System.out.println("21 to 30 \t\t " + girlScoutCookieSales[2]);
+        System.out.println("31 to 40 \t\t " + girlScoutCookieSales[3]);
+        System.out.println("41 or more \t\t " + girlScoutCookieSales[4]);
+    }
+}
