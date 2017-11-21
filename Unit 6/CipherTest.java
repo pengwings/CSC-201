@@ -2,9 +2,16 @@ public class CipherTest {
     public static void main(String[] args){
         String test = "abcdefghi";
         SubstitutionCipher testCipher = new SubstitutionCipher(2);
-        System.out.println(testCipher.encode(test));
+        test = testCipher.encode(test);
+        System.out.println(test);
+        test = testCipher.decode(test);
+        System.out.println(test);
+
 
         ShuffleCipher testShuffle = new ShuffleCipher(2);
-        System.out.println(testShuffle.encode(test));
+        test = testShuffle.encode(test);
+        System.out.println(test);
+        test = testShuffle.decode(test);
+        System.out.println(test);
     }
 }

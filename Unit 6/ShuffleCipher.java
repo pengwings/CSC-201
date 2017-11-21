@@ -1,4 +1,4 @@
-public class ShuffleCipher implements MessageEncoder {
+public class ShuffleCipher implements MessageEncoder, MessageDecoder {
     int n;
 
     public ShuffleCipher(int n){
@@ -13,17 +13,43 @@ public class ShuffleCipher implements MessageEncoder {
     }
 
     private String encodeStep(String plainText){
-        String newString1 = plainText.substring(0, plainText.length()/2+1);
-        String newString2 = plainText.substring(plainText.length()/2+1, plainText.length());
-        String newString = "";
-        try {
-            for (int i = 0; i < newString1.length()+1; i++) {
-                newString = newString + newString1.charAt(i) + newString2.charAt(i);
+        StringBuilder newString1 = new StringBuilder(plainText.substring(0, plainText.length()/2+1));
+        StringBuilder newString2 = new StringBuilder(plainText.substring(plainText.length()/2+1, plainText.length()));
+        StringBuilder newString = new StringBuilder();
+        while(newString1.length()>0) {
+            newString.append(newString1.charAt(0));
+            newString1.deleteCharAt(0);
+            if(newString2.length()>0) {
+                newString.append(newString2.charAt(0));
+                newString2.deleteCharAt(0);
             }
-        } catch(StringIndexOutOfBoundsException e){
-            newString = newString + newString1.charAt(newString1.length()-1);
         }
-        return newString;
+        plainText = newString.toString();
+        return plainText;
+    }
+
+    public String decode(String cipherText) {
+        for(int i = 0; i<n; i++) {
+            cipherText = this.decodeStep(cipherText);
+        }
+        return cipherText;
+    }
+
+    private String decodeStep(String cipherText) {
+        StringBuilder newString1 = new StringBuilder();
+        StringBuilder newString2 = new StringBuilder();
+        StringBuilder newString = new StringBuilder(cipherText);
+        while(newString.length()>0) {
+            newString1.append(newString.charAt(0));
+            newString.deleteCharAt(0);
+            if(newString.length()>0) {
+                newString2.append(newString.charAt(0));
+                newString.deleteCharAt(0);
+            }
+        }
+        newString1.append(newString2);
+        cipherText = newString1.toString();
+        return cipherText;
     }
 
 }
