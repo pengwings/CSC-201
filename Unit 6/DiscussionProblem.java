@@ -1,3 +1,5 @@
+// (Sort ArrayList) Write the following method that sorts an ArrayList of numbers. public static void sort(ArrayList<Number> list)
+
 import java.util.ArrayList
 
 public class DiscussionProblem {
